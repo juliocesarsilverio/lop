@@ -1,0 +1,32 @@
+var x = 100, y = 100, dx = 2;
+function setup(){
+createCanvas (500, 500); //tamanho da area
+}
+function draw(){
+
+ if (keyIsDown(LEFT_ARROW)){
+   x -= 5;
+ }
+  if (keyIsDown(RIGHT_ARROW)){
+   x += 5;
+ }
+  if (keyIsDown(UP_ARROW)){
+   y -= 5;
+ }
+  if (keyIsDown(DOWN_ARROW)){
+   y += 5;
+ }
+  background (50); //fundo
+  x= x+dx;
+  fill (255, 0, 0); //cor vermelha
+  ellipse( x, y, 55, 55);
+  rect (200, 400, 80, 80);
+   if (x>width){ //movimento da elipse
+     dx=-2
+    //x =random(-500, -50);
+  console.log(x+" ");
+  }
+  if (x<0){
+    dx = +2
+  }
+}
