@@ -1,0 +1,87 @@
+var x = 100, y = 100, dx = 2, dy = 0, vidas = 3, disparo = false, xd, yd, xj, yj, xinimigo, yinimigo;
+var raio = , raioj= 
+function setup(){
+createCanvas (500, 500); //tamanho da area
+  xj = 50;
+  xd = xj; 
+  xinimigo = 200
+  yinimigo = 400
+  yj = 340; 
+  yd = yj; 
+}
+function draw(){
+
+ if (keyIsDown(LEFT_ARROW)){
+   x -= 5;
+ }
+  if (keyIsDown(RIGHT_ARROW)){
+   x += 5;
+ }
+  if (keyIsDown(UP_ARROW)){
+   y -= 5;
+ }
+  if (keyIsDown(DOWN_ARROW)){
+   y += 5;
+ }
+    // Tratamento das teclas 
+  if (keyIsDown(CONTROL) && (! disparo) ){ 
+    disparo = true; 
+    xd = x;
+    yd = y;     
+  }
+  // movimentação do disparo 
+  // se o disparo estiver ativo 
+  if (disparo) {
+    // movimenta o disparo / tiro 
+    xd = xd +10;
+    
+    y = y+dy;
+    if ( x > 500) {
+   dx = -dx;   
+ }
+ if ( y > 500) {
+   dy = - dy;   //
+ }
+ if ( x < 0 ) {
+   dx = -dx;   
+ }
+ if ( y < 0 ) {
+    dy = -dy;  
+ }
+    if ( dist(xd,yd,xInimigo,yInimigo) < raio+raioJ ) {
+     if ( colisao == false) { 
+             
+       colisao = true; 
+    
+    // se o disparo sumir na tela 
+    if (xd > width) {
+      // habilida a ocorrência de um novo disparo 
+      disparo = false; 
+    }
+  }
+      background (50); //fundo
+  
+  fill (255, 0, 0); //cor vermelha
+  
+  ellipse (xinimigo, yinimigo, 80, 80);
+   if (x>width){ //movimento da elipse
+     dx=-2
+    //x =random(-500, -50);
+  console.log(x+" ");
+  }
+  // desenha jogador 
+  ellipse( x, y, 35, 35); // tamanho do disparo
+    // se o disparo estiver ativo 
+  if (disparo) {
+    // desenha a elipse / disparo 
+    ellipse(xd,yd,7,7);
+  }
+  textSize(20);
+  fill(200, 200, 40);
+  text("vidas: " +vidas, 400, 60); //texto
+
+  if (x<0){
+    dx += 2;
+  }
+}
+  
