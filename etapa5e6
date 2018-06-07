@@ -1,5 +1,5 @@
 var x = 100, y = 100, dx = 2, dy = 0, vidas = 3, disparo = false, xd, yd, xj, yj, xinimigo, yinimigo;
-var raio = , raioj= 
+var raio = 40, raioj= 18, raiod = 4, colisao = false, corv=255, cora=0
 function setup(){
 createCanvas (500, 500); //tamanho da area
   xj = 50;
@@ -36,33 +36,41 @@ function draw(){
     xd = xd +10;
     
     y = y+dy;
-    if ( x > 500) {
-   dx = -dx;   
- }
- if ( y > 500) {
-   dy = - dy;   //
- }
- if ( x < 0 ) {
-   dx = -dx;   
- }
- if ( y < 0 ) {
-    dy = -dy;  
- }
-    if ( dist(xd,yd,xInimigo,yInimigo) < raio+raioJ ) {
-     if ( colisao == false) { 
-             
-       colisao = true; 
     
-    // se o disparo sumir na tela 
-    if (xd > width) {
+  }
+    if ( dist(xd,yd,xinimigo,yinimigo) < raio+raiod ) {
+     if ( colisao == false) { 
+         colisao = true; 
+         vidas--
+         corv=0
+         cora=255
+     
+        }
+    }
+  if ( dist(xd,yd,xinimigo,yinimigo) > raio+raiod ) {
+     if ( colisao == true) { 
+         colisao = false; 
+        fill (255, 0, 0); 
+             corv=255
+         cora=0
+         disparo = false; 
+                }
+    }
+     // se o disparo sumir na tela 
+   if (xd > width) {
       // habilida a ocorrência de um novo disparo 
       disparo = false; 
-    }
-  }
+   }
       background (50); //fundo
   
-  fill (255, 0, 0); //cor vermelha
-  
+
+  if (disparo) {
+    fill (255, 255, 0)
+    // desenha a elipse / disparo 
+    ellipse(xd,yd,8,8);
+    
+  }
+    fill (corv, 0, cora); //cor vermelha
   ellipse (xinimigo, yinimigo, 80, 80);
    if (x>width){ //movimento da elipse
      dx=-2
@@ -70,12 +78,10 @@ function draw(){
   console.log(x+" ");
   }
   // desenha jogador 
-  ellipse( x, y, 35, 35); // tamanho do disparo
+  fill (0, 255, 0);
+  ellipse( x, y, 36, 36); // tamanho do disparo
     // se o disparo estiver ativo 
-  if (disparo) {
-    // desenha a elipse / disparo 
-    ellipse(xd,yd,7,7);
-  }
+  
   textSize(20);
   fill(200, 200, 40);
   text("vidas: " +vidas, 400, 60); //texto
@@ -83,5 +89,4 @@ function draw(){
   if (x<0){
     dx += 2;
   }
-}
-  
+  }
